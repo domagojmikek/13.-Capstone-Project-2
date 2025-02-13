@@ -1,6 +1,7 @@
 /* motor */
 .motor {
     display: flex;
+    justify-content: center;
     height: 100vh;
     background-color: #1a1c20;
 }
@@ -15,7 +16,6 @@
     width: 300;
     }
 .motor img {
-    
     width: 270px;
     height: 270px;
     object-fit: contain;
