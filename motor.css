@@ -1,0 +1,24 @@
+/* motor */
+.motor {
+    display: flex;
+    height: 100vh;
+    background-color: #1a1c20;
+}
+.motor img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 670px){
+    .motor {
+    width: 300;
+    }
+.motor img {
+    
+    width: 270px;
+    height: 270px;
+    object-fit: contain;
+    border-radius: 2px;
+    }
+}
