@@ -49,7 +49,6 @@ nav {
 }
 
 nav .left a {
-    
     color: var(--text-color);
     font-size: 22px;
     font-weight: 600;
@@ -119,6 +118,7 @@ nav .right a span {
 .hero-section .headshot {
     flex: 2;
     display: flex;
+    flex-direction: column;
     justify-content: right;
 }
 
@@ -128,6 +128,7 @@ nav .right a span {
     object-fit: cover;
     border-radius: 50%;
 }
+
 
 /* SECTION 2: skills */
 .skills-section {
@@ -181,7 +182,15 @@ font-size: 18px;
     
 }
 
+.resume img {
+    display: flex;
+    width: 100%;
+   
+}
+
 /* SECTION 3: interest */
+
+
 .interests-section { 
     display: grid;
     align-items: center;
@@ -190,6 +199,7 @@ font-size: 18px;
     margin-bottom: 100px;
     gap: 40px;
 }
+
 .interests-section .links h2 {
     font-size: 35px;  
 }
@@ -222,7 +232,7 @@ font-size: 18px;
 
 .contact-section .group {
     display: flex;
-    gap: 50px;
+    gap: 150px;
 }
 
 .contact-section .group .text {
