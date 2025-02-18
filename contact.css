@@ -91,7 +91,7 @@ img {
 
 .card__content {
     position: relative;
-    width: calc(100vw - 7rem);
+    width: calc(100vw - 40rem);
     background-color: #eeeff1;
     box-shadow: 0 16px 32px hsla(230, 50%, 20%, .1);
     padding: 2rem 1.5rem;
@@ -198,4 +198,17 @@ img {
         width: 380px;
         padding-inline: 2rem;
     }
+
+}
+
+@media (max-width: 670px){
+    .card__content {
+        width: calc(100vw - 3.3rem);
+        }
+}
+
+@media (min-width: 670px ) and (max-width: 850px){
+    .card__content {
+        width: calc(100vw - 20rem);
+        }
 }
