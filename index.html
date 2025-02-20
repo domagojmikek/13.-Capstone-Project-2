@@ -251,19 +251,77 @@
 
      </main>
 
-     <script>
-        function updateStatus() {
-            const statusIndicator = document.getElementById("card__status");
-            if (navigator.onLine) {
-                statusIndicator.style.backgroundColor = "green";
+     <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-analytics.js";
+        import { getDatabase, ref, set, onDisconnect, onValue } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-database.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyA9l9549ow3kFFp4ts33Pvp5oGE1M0pepo",
+          authDomain: "realtime-database-f5f64.firebaseapp.com",
+          databaseURL: "https://realtime-database-f5f64-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "realtime-database-f5f64",
+          storageBucket: "realtime-database-f5f64.firebasestorage.app",
+          messagingSenderId: "918559204016",
+          appId: "1:918559204016:web:526add89b1c85dfc2ed175",
+          measurementId: "G-T1T7C412E1"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+      
+        // Initialize Firebase Authentication and Database
+        const auth = getAuth();
+        const database = getDatabase(app);
+      
+        // Pratimo stanje prijave korisnika
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            const userId = user.uid;
+            const userStatusDatabaseRef = ref(database, '/status/' + userId);
+      
+            // Postavi korisnika online u bazu podataka
+            set(userStatusDatabaseRef, {
+              state: 'online',
+              last_changed: Date.now()
+            });
+      
+            // Postavi offline status kada korisnik izgubi vezu
+            onDisconnect(userStatusDatabaseRef).set({
+              state: 'offline',
+              last_changed: Date.now()
+            });
+      
+            // Prikazujemo status korisnika
+            updateStatusUI(userId);
+          }
+        });
+      
+        // Funkcija za prikazivanje statusa korisnika na stranici
+        function updateStatusUI(userId) {
+          const statusRef = ref(database, '/status/' + userId);
+      
+          // Pratimo promjene statusa korisnika
+          onValue(statusRef, (snapshot) => {
+            const status = snapshot.val();
+            const statusElement = document.getElementById("card__status"); // Element s ID-jem card__status
+      
+            if (status.state === 'online') {
+              statusElement.textContent = "Status: Online";
+              statusElement.style.backgroundColor = ""; // Resetiranje boje pozadine na zadanu
             } else {
-                statusIndicator.style.backgroundColor = "red";}
-            
+              statusElement.textContent = "Status: Offline";
+              statusElement.style.backgroundColor = "red"; // Postavljanje boje pozadine na crveno
             }
-            updateStatus();
-            window.addEventListener("online", updateStatus);
-            window.addEventListener("offline", updateStatus);
-    </script>
+          });
+        }
+      </script>
+      
+ 
 
 
 
