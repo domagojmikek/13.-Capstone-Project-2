@@ -215,7 +215,7 @@
                                     <div class="card__mask">
                                         <img src="./images/profilna.png" alt="image" class="card__img">
                                     </div>
-                                    <span class="card__status"></span>
+                                    <span id="card__status"></span>
                                 </div>
         
                                 <h2 class="card__name">Domagoj Mikek</h2>
@@ -236,24 +236,34 @@
                 for a motivated developer, feel free to reach out! I am open to collaboration, mentorship, and job 
                 opportunities in the tech industy. Let's connect and grow together!
             </div>
-            <form>
+            <form action="https://api.web3forms.com/submit" method="POST" class="contact">
+                <input type="hidden" name="access_key" value="f9e05b33-e1fd-4b14-accb-b0bdc9feed98">
                 <label for="name">Name</label>
-                <input type="text" id="name">
-
+                <input type="text" name="name"  class="contact-inputs" required>
                 <label for="email">Email</label>
-                <input type="email" id="email">
-
-                <label for="message">Messsage</label>
-                <textarea name="message" cols="30" rows="10"></textarea>
-
+                <input type="email" name="email"  class="contact-inputs" required>
+                <label for="message">Message</label>
+                <textarea name="message" class="contact-inputs" required></textarea>
                 <button type="submit">Send message</button>
             </form>
         </div> 
         </section>
 
      </main>
-     <script src="main.js"></script>
 
+     <script>
+        function updateStatus() {
+            const statusIndicator = document.getElementById("card__status");
+            if (navigator.onLine) {
+                statusIndicator.style.backgroundColor = "green";
+            } else {
+                statusIndicator.style.backgroundColor = "red";}
+            
+            }
+            updateStatus();
+            window.addEventListener("online", updateStatus);
+            window.addEventListener("offline", updateStatus);
+    </script>
 
 
 
